@@ -46,12 +46,14 @@ public class ModuleWeaver : BaseModuleWeaver
         {
             if (!IsApplicableTypeDefintion(type))
             {
+                LogDebug($"Skipping type {type.Name}, not applicable");
                 continue;
             }
 
             var iLoggerField = type.GetFieldDefintion(ILoggerField);
             if (iLoggerField == null)
             {
+                LogDebug($"Skipping type {type.Name}, ILogger field not found");
                 continue;
             }
 
@@ -61,6 +63,7 @@ public class ModuleWeaver : BaseModuleWeaver
             {
                 if (!IsApplicableMethodDefintion(method))
                 {
+                    LogDebug($"Skipping method {method.Name}, not applicable");
                     continue;
                 }
 
@@ -197,6 +200,8 @@ public class ModuleWeaver : BaseModuleWeaver
     {
         var logInstruction = loggingInstructionBlock.Instructions[loggingInstructionBlock.LogInstructionIndex];
         var logLevel = _logLevelValues.First(x => logInstruction.ToString().Contains(x.Name));
+
+        LogDebug($"Weaving logging block for LogLevel: [{logLevel.Name}]");
 
         if (_isDebugBuild)
         {
