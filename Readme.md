@@ -1,3 +1,5 @@
+[![Build status](https://joris.visualstudio.com/Fody/_apis/build/status/LogginIsEnabled.Fody-CI)](https://joris.visualstudio.com/Fody/_build/latest?definitionId=15)
+
 ## This is an add-in for [Fody](https://github.com/Fody/Fody/) 
 
 Adds ILogger.IsEnabled(LogLevel) check around the logging statement. To reduce the boilerplate code, but still have the performance benefit when a certain LogLevel is turned off.
