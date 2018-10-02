@@ -82,8 +82,7 @@ public class ModuleWeaver : BaseModuleWeaver
 
     private bool IsApplicableMethodDefintion(MethodDefinition methodDefinition)
     {
-        return !methodDefinition.IsConstructor
-            && methodDefinition.HasBody;
+        return methodDefinition.HasBody;
     }
 
     private void ProcessMethod(FieldDefinition iLoggerField, MethodBody methodBody)
