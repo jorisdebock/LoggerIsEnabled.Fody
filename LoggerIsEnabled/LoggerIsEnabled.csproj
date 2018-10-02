@@ -4,11 +4,11 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <SignAssembly>false</SignAssembly>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Description>Adds ILogger.IsEnabled check around your ILogger statement.</Description>
+    <PackageTags>LoggerIsEnabled, ILogger, ILWeaving, Fody, Cecil</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Fody" Version="3.2.7" PrivateAssets="all">
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
+    <PackageReference Include="Fody" Version="3.2.7" PrivateAssets="None" />
     <PackageReference Include="FodyPackaging" Version="3.2.7" PrivateAssets="All" />
   </ItemGroup>
 </Project>
