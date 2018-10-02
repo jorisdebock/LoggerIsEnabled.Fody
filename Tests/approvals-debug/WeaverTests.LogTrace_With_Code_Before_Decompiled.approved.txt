@@ -29,5 +29,5 @@
     IL_002e:  nop
     IL_002f:  nop
     IL_0030:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace_With_Code_Before
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

@@ -19,5 +19,5 @@
                                                                                                                                  string,
                                                                                                                                  object[])
     IL_0023:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

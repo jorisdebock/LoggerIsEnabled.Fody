@@ -29,5 +29,5 @@
     IL_002a:  call       instance void LoggerIsEnabledSenarios::CodeAfter()
     IL_002f:  nop
     IL_0030:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace_With_Code_After
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

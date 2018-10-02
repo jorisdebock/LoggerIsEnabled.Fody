@@ -10,7 +10,7 @@
     IL_0001:  ldarg.1
     IL_0002:  call       instance void LoggerIsEnabledSenariosAbstract::.ctor(class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger)
     IL_0007:  ret
-  } // end of method LoggerIsEnabledSenariosAbstractImplementation::.ctor
+  } 
   .method public hidebysig virtual instance void 
           LogDebug() cil managed
   {
@@ -29,5 +29,5 @@
                                                                                                                                  string,
                                                                                                                                  object[])
     IL_0023:  ret
-  } // end of method LoggerIsEnabledSenariosAbstractImplementation::LogDebug
-} // end of class LoggerIsEnabledSenariosAbstractImplementation
+  } 
+}

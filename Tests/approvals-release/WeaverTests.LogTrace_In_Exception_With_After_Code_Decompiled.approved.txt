@@ -30,5 +30,5 @@
     IL_0028:  ldarg.0
     IL_0029:  call       instance void LoggerIsEnabledSenarios::CodeAfter()
     IL_002e:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace_In_Exception_With_After_Code
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

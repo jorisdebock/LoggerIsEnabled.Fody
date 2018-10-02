@@ -51,5 +51,5 @@
     IL_0050:  nop
     IL_0051:  br.s       IL_0053
     IL_0053:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace_In_Switch_With_After_Code
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

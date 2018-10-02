@@ -31,5 +31,5 @@
                                                                                                                                  string,
                                                                                                                                  object[])
     IL_0046:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace_Multiple_With_Second_IsEnabled
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

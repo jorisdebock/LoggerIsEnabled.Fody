@@ -15,7 +15,7 @@
     IL_0009:  ldarg.1
     IL_000a:  stfld      class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledSenariosAbstract::_logger
     IL_000f:  ret
-  } // end of method LoggerIsEnabledSenariosAbstract::.ctor
+  } 
   .method public hidebysig instance void 
           LogTrace() cil managed
   {
@@ -41,9 +41,9 @@
     IL_0027:  nop
     IL_0028:  nop
     IL_0029:  ret
-  } // end of method LoggerIsEnabledSenariosAbstract::LogTrace
+  } 
   .method public hidebysig newslot abstract virtual 
           instance void  LogDebug() cil managed
   {
-  } // end of method LoggerIsEnabledSenariosAbstract::LogDebug
-} // end of class LoggerIsEnabledSenariosAbstract
+  } 
+}

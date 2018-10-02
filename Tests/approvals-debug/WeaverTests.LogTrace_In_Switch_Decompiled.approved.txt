@@ -48,5 +48,5 @@
     IL_0049:  nop
     IL_004a:  br.s       IL_004c
     IL_004c:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace_In_Switch
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

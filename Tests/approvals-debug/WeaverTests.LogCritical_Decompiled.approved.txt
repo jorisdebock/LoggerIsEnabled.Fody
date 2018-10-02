@@ -26,5 +26,5 @@
     IL_0027:  nop
     IL_0028:  nop
     IL_0029:  ret
-  } // end of method LoggerIsEnabledSenarios::LogCritical
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

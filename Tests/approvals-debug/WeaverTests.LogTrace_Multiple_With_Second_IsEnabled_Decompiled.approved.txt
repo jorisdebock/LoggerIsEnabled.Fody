@@ -44,5 +44,5 @@
     IL_004f:  nop
     IL_0050:  nop
     IL_0051:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace_Multiple_With_Second_IsEnabled
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

@@ -2,4 +2,4 @@
        extends [netstandard]System.Enum
 {
   .field public specialname rtspecialname int32 value__
-} // end of class LoggerIsEnabledEnum
+}

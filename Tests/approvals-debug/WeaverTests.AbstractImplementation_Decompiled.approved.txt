@@ -12,7 +12,7 @@
     IL_0007:  nop
     IL_0008:  nop
     IL_0009:  ret
-  } // end of method LoggerIsEnabledSenariosAbstractImplementation::.ctor
+  } 
   .method public hidebysig virtual instance void 
           LogDebug() cil managed
   {
@@ -38,5 +38,5 @@
     IL_0027:  nop
     IL_0028:  nop
     IL_0029:  ret
-  } // end of method LoggerIsEnabledSenariosAbstractImplementation::LogDebug
-} // end of class LoggerIsEnabledSenariosAbstractImplementation
+  } 
+}

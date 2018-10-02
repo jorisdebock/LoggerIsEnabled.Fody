@@ -30,5 +30,5 @@
       IL_002c:  leave.s    IL_002e
     }  // end handler
     IL_002e:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace_In_Exception_With_After_Code_In_Try
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

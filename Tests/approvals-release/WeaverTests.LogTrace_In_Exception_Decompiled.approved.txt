@@ -28,5 +28,5 @@
       IL_0026:  leave.s    IL_0028
     }  // end handler
     IL_0028:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace_In_Exception
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

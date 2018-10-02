@@ -32,5 +32,5 @@
     IL_0035:  nop
     IL_0036:  nop
     IL_0037:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTraceWithEnabled_With_Code_Before_And_After
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

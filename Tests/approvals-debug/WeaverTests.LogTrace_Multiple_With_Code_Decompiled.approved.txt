@@ -50,5 +50,5 @@
     IL_005d:  nop
     IL_005e:  nop
     IL_005f:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace_Multiple_With_Code
-} // end of class LoggerIsEnabledSenarios
+  } 
+}

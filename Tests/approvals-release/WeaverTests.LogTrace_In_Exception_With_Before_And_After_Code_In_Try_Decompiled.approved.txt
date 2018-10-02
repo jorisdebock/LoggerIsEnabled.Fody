@@ -32,5 +32,5 @@
       IL_0032:  leave.s    IL_0034
     }  // end handler
     IL_0034:  ret
-  } // end of method LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_And_After_Code_In_Try
-} // end of class LoggerIsEnabledSenarios
+  } 
+}
