@@ -1,0 +1,36 @@
+﻿.class public auto ansi beforefieldinit LoggerIsEnabledSenarios
+       extends [netstandard]System.Object
+{
+  .method public hidebysig instance void 
+          LogTrace_With_Code_Before_And_After() cil managed
+  {
+    // Code size       56 (0x38)
+    .maxstack  3
+    .locals init (bool V_0)
+    IL_0000:  nop
+    IL_0001:  ldarg.0
+    IL_0002:  call       instance void LoggerIsEnabledSenarios::CodeBefore()
+    IL_0007:  nop
+    IL_0008:  ldarg.0
+    IL_0009:  ldfld      class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledSenarios::_logger
+    IL_000e:  ldc.i4.0
+    IL_000f:  callvirt   instance bool [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger::IsEnabled(valuetype [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LogLevel)
+    IL_0014:  stloc.0
+    IL_0015:  ldloc.0
+    IL_0016:  brfalse.s  IL_0030
+    IL_0018:  nop
+    IL_0019:  ldarg.0
+    IL_001a:  ldfld      class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledSenarios::_logger
+    IL_001f:  ldstr      "message"
+    IL_0024:  call       !!0[] [netstandard]System.Array::Empty<object>()
+    IL_0029:  call       void [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LoggerExtensions::LogTrace(class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger,
+                                                                                                                                 string,
+                                                                                                                                 object[])
+    IL_002e:  nop
+    IL_002f:  nop
+    IL_0030:  ldarg.0
+    IL_0031:  call       instance void LoggerIsEnabledSenarios::CodeAfter()
+    IL_0036:  nop
+    IL_0037:  ret
+  } // end of method LoggerIsEnabledSenarios::LogTrace_With_Code_Before_And_After
+} // end of class LoggerIsEnabledSenarios

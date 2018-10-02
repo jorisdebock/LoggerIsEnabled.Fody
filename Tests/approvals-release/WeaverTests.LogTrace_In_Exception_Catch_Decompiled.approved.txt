@@ -1,0 +1,34 @@
+﻿.class public auto ansi beforefieldinit LoggerIsEnabledSenarios
+       extends [netstandard]System.Object
+{
+  .method public hidebysig instance void 
+          LogTrace_In_Exception_Catch() cil managed
+  {
+    // Code size       47 (0x2f)
+    .maxstack  3
+    .try
+    {
+      IL_0000:  ldarg.0
+      IL_0001:  call       instance void LoggerIsEnabledSenarios::CodeThrowException()
+      IL_0006:  leave.s    IL_002e
+    }  // end .try
+    catch [netstandard]System.Exception 
+    {
+      IL_0008:  pop
+      IL_0009:  ldarg.0
+      IL_000a:  ldfld      class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledSenarios::_logger
+      IL_000f:  ldc.i4.0
+      IL_0010:  callvirt   instance bool [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger::IsEnabled(valuetype [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LogLevel)
+      IL_0015:  brfalse.s  IL_002c
+      IL_0017:  ldarg.0
+      IL_0018:  ldfld      class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledSenarios::_logger
+      IL_001d:  ldstr      "message"
+      IL_0022:  call       !!0[] [netstandard]System.Array::Empty<object>()
+      IL_0027:  call       void [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LoggerExtensions::LogTrace(class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger,
+                                                                                                                                   string,
+                                                                                                                                   object[])
+      IL_002c:  leave.s    IL_002e
+    }  // end handler
+    IL_002e:  ret
+  } // end of method LoggerIsEnabledSenarios::LogTrace_In_Exception_Catch
+} // end of class LoggerIsEnabledSenarios

@@ -1,0 +1,52 @@
+﻿.class public auto ansi beforefieldinit LoggerIsEnabledSenarios
+       extends [netstandard]System.Object
+{
+  .method public hidebysig instance void 
+          LogTrace_In_Switch() cil managed
+  {
+    // Code size       77 (0x4d)
+    .maxstack  3
+    .locals init (int32 V_0,
+             int32 V_1,
+             bool V_2)
+    IL_0000:  nop
+    IL_0001:  ldc.i4.1
+    IL_0002:  stloc.0
+    IL_0003:  ldloc.0
+    IL_0004:  stloc.1
+    IL_0005:  ldloc.1
+    IL_0006:  brfalse.s  IL_0010
+    IL_0008:  br.s       IL_000a
+    IL_000a:  ldloc.1
+    IL_000b:  ldc.i4.1
+    IL_000c:  beq.s      IL_0019
+    IL_000e:  br.s       IL_0043
+    IL_0010:  ldarg.0
+    IL_0011:  call       instance void LoggerIsEnabledSenarios::CodeBefore()
+    IL_0016:  nop
+    IL_0017:  br.s       IL_004c
+    IL_0019:  ldarg.0
+    IL_001a:  ldfld      class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledSenarios::_logger
+    IL_001f:  ldc.i4.0
+    IL_0020:  callvirt   instance bool [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger::IsEnabled(valuetype [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LogLevel)
+    IL_0025:  stloc.0
+    IL_0026:  ldloc.0
+    IL_0027:  brfalse.s  IL_0041
+    IL_0029:  nop
+    IL_002a:  ldarg.0
+    IL_002b:  ldfld      class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledSenarios::_logger
+    IL_0030:  ldstr      "message"
+    IL_0035:  call       !!0[] [netstandard]System.Array::Empty<object>()
+    IL_003a:  call       void [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LoggerExtensions::LogTrace(class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger,
+                                                                                                                                 string,
+                                                                                                                                 object[])
+    IL_003f:  nop
+    IL_0040:  nop
+    IL_0041:  br.s       IL_004c
+    IL_0043:  ldarg.0
+    IL_0044:  call       instance void LoggerIsEnabledSenarios::CodeAfter()
+    IL_0049:  nop
+    IL_004a:  br.s       IL_004c
+    IL_004c:  ret
+  } // end of method LoggerIsEnabledSenarios::LogTrace_In_Switch
+} // end of class LoggerIsEnabledSenarios
