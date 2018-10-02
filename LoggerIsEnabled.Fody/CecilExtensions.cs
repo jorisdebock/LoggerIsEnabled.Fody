@@ -19,10 +19,10 @@ public static class CecilExtensions
 
     public static FieldDefinition GetFieldDefintion(this TypeDefinition typeDefinition, string fullName)
     {
-        var field = typeDefinition.Fields.FirstOrDefault(x => x.FieldType.FullName == fullName);
+        var field = typeDefinition.Fields.FirstOrDefault(x => x.FieldType.FullName.Contains(fullName));
         if (field == null)
         {
-            field = typeDefinition.BaseType?.Resolve().Fields.FirstOrDefault(x => x.FieldType.FullName == fullName);
+            field = typeDefinition.BaseType?.Resolve().Fields.FirstOrDefault(x => x.FieldType.FullName.Contains(fullName));
         }
 
         return field;
