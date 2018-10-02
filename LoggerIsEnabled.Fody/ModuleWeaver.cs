@@ -204,7 +204,7 @@ public class ModuleWeaver : BaseModuleWeaver
 
         if (_isDebugBuild)
         {
-            methodBody.Variables.Add(new VariableDefinition(FindType("System.Boolean")));
+            methodBody.Variables.Add(new VariableDefinition(ModuleDefinition.TypeSystem.Boolean));
         }
 
         var il = methodBody.GetILProcessor();
