@@ -33,6 +33,7 @@ Add `<LoggerIsEnabled/>` to [FodyWeavers.xml](https://github.com/Fody/Fody#add-f
 
 
 ### Your Code
+For all scenarios see [AssemblyToProcess](https://github.com/wazowsk1/LoggerIsEnabled.Fody/tree/master/AssemblyToProcess)
 
 ```c#
 public class Example
