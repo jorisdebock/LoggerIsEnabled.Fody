@@ -1,6 +1,9 @@
+[![Build status](https://joris.visualstudio.com/Fody/_apis/build/status/LogginIsEnabled.Fody-CI)](https://joris.visualstudio.com/Fody/_build/latest?definitionId=15)
+[![](https://img.shields.io/nuget/v/LoggerIsEnabled.Fody.svg)](https://www.nuget.org/packages/LoggerIsEnabled.Fody)
+
 ## This is an add-in for [Fody](https://github.com/Fody/Fody/) 
 
-Adds ILogger.IsEnabled(LogLevel) check around the logging statement. To reduce the boilerplate code, but still have the performance benefit when a certain LogLevel is turned off.
+For the [Microsoft.Extensions.Logging.ILogger](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Abstractions) interface, this will add the ILogger.IsEnabled(LogLevel) check around the logging statement. To reduce the boilerplate code, but still have the performance benefit when a certain LogLevel is turned off.
 
 
 ## Usage
