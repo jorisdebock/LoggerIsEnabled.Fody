@@ -4,21 +4,14 @@ using Moq;
 using System;
 using System.Linq.Expressions;
 using Xunit;
-
-#if (NET461)
-
 using ApprovalTests;
 using ApprovalTests.Namers;
 using ApprovalTests.Reporters;
 
 #if(DEBUG)
-
 [UseApprovalSubdirectory("approvals-debug")]
 #else
-
 [UseApprovalSubdirectory("approvals-release")]
-#endif
-
 #endif
 
 #pragma warning disable 618
@@ -44,7 +37,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace();
 
@@ -59,7 +52,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace();
 
@@ -74,7 +67,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Debug)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogDebug();
 
@@ -89,7 +82,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Debug)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogDebug();
 
@@ -104,7 +97,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Information)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogInformation();
 
@@ -119,7 +112,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Information)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogInformation();
 
@@ -134,7 +127,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Warning)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogWarning();
 
@@ -149,7 +142,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Warning)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogWarning();
 
@@ -164,7 +157,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Error)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogError();
 
@@ -179,7 +172,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Error)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogError();
 
@@ -194,7 +187,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Critical)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogCritical();
 
@@ -209,7 +202,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Critical)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogCritical();
 
@@ -224,7 +217,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTraceWithEnabled();
 
@@ -239,7 +232,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTraceWithEnabled_With_Code_Before();
 
@@ -254,7 +247,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTraceWithEnabled_With_Code_After();
 
@@ -269,7 +262,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTraceWithEnabled_With_Code_Before_And_After();
 
@@ -284,7 +277,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_With_Code_Before();
 
@@ -299,7 +292,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_With_Code_After();
 
@@ -314,7 +307,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_With_Code_Before_And_After();
 
@@ -329,7 +322,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_Multiple();
 
@@ -344,7 +337,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_Multiple_With_First_IsEnabled();
 
@@ -359,7 +352,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_Multiple_With_Second_IsEnabled();
 
@@ -374,7 +367,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_Multiple_With_Code();
 
@@ -389,7 +382,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Switch();
 
@@ -404,7 +397,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Switch_With_Before_Code();
 
@@ -419,7 +412,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Switch_With_After_Code();
 
@@ -434,7 +427,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Switch_With_Before_And_After_Code();
 
@@ -449,7 +442,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception();
 
@@ -464,7 +457,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_Before_Code();
 
@@ -479,7 +472,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_After_Code();
 
@@ -494,7 +487,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_Before_And_After_Code();
 
@@ -509,7 +502,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_Before_Code_In_Try();
 
@@ -524,7 +517,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_After_Code_In_Try();
 
@@ -539,7 +532,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_Before_And_After_Code_In_Try();
 
@@ -554,15 +547,13 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_Catch();
 
         mockLogger.Verify(x => x.IsEnabled(LogLevel.Trace), Times.Once);
         mockLogger.Verify(_logAction, Times.Once);
     }
-
-#if (NET461)
 
     [Fact]
     [UseReporter(typeof(DiffReporter))]
@@ -794,6 +785,4 @@ public class WeaverTests
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_Catch"));
     }
-
-#endif
 }
