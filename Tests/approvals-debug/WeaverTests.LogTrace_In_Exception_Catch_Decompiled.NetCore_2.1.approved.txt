@@ -1,0 +1,46 @@
+﻿.class public auto ansi beforefieldinit LoggerIsEnabledScenarios
+       extends [netstandard]System.Object
+{
+  .method public hidebysig instance void 
+          LogTrace_In_Exception_Catch() cil managed
+  {
+    // Code size       58 (0x3a)
+    .maxstack  3
+    .locals init (bool V_0)
+    IL_0000:  nop
+    .try
+    {
+      IL_0001:  nop
+      IL_0002:  ldarg.0
+      IL_0003:  call       instance void LoggerIsEnabledScenarios::CodeThrowException()
+      IL_0008:  nop
+      IL_0009:  nop
+      IL_000a:  leave.s    IL_0039
+    }  // end .try
+    catch [netstandard]System.Exception 
+    {
+      IL_000c:  pop
+      IL_000d:  nop
+      IL_000e:  ldarg.0
+      IL_000f:  ldfld      class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledScenarios::_logger
+      IL_0014:  ldc.i4.0
+      IL_0015:  callvirt   instance bool [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger::IsEnabled(valuetype [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LogLevel)
+      IL_001a:  stloc.0
+      IL_001b:  ldloc.0
+      IL_001c:  brfalse.s  IL_0036
+      IL_001e:  nop
+      IL_001f:  ldarg.0
+      IL_0020:  ldfld      class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledScenarios::_logger
+      IL_0025:  ldstr      "message"
+      IL_002a:  call       !!0[] [netstandard]System.Array::Empty<object>()
+      IL_002f:  call       void [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LoggerExtensions::LogTrace(class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger,
+                                                                                                                                   string,
+                                                                                                                                   object[])
+      IL_0034:  nop
+      IL_0035:  nop
+      IL_0036:  nop
+      IL_0037:  leave.s    IL_0039
+    }  // end handler
+    IL_0039:  ret
+  } 
+}

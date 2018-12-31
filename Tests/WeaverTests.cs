@@ -6,7 +6,6 @@ using System.Linq.Expressions;
 using Xunit;
 using ApprovalTests;
 using ApprovalTests.Namers;
-using ApprovalTests.Reporters;
 
 #if(DEBUG)
 [UseApprovalSubdirectory("approvals-debug")]
@@ -16,18 +15,24 @@ using ApprovalTests.Reporters;
 
 #pragma warning disable 618
 
-public class WeaverTests
+public class WeaverTests:IDisposable
 {
     private static readonly TestResult _testResult;
     private static readonly Type _type;
 
     private readonly Expression<Action<ILogger>> _logAction = x => x.Log(It.IsAny<LogLevel>(), 0, It.IsAny<object>(), It.IsAny<Exception>(), It.IsAny<Func<object, Exception, string>>());
+    private IDisposable uniqueForRuntime;
 
     static WeaverTests()
     {
         var weavingTask = new ModuleWeaver();
         _testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll", runPeVerify: false);
-        _type = _testResult.Assembly.GetType("LoggerIsEnabledSenarios");
+        _type = _testResult.Assembly.GetType("LoggerIsEnabledScenarios");
+    }
+
+    public WeaverTests()
+    {
+        uniqueForRuntime = ApprovalResults.UniqueForRuntime();
     }
 
     [Fact]
@@ -558,19 +563,19 @@ public class WeaverTests
     [Fact]
     public void Interface_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "ILoggerIsEnabledSenarios"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "ILoggerIsEnabledScenarios"));
     }
 
     [Fact]
     public void Abstract_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenariosAbstract"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenariosAbstract"));
     }
 
     [Fact]
     public void AbstractImplementation_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenariosAbstractImplementation"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenariosAbstractImplementation"));
     }
 
     [Fact]
@@ -582,174 +587,179 @@ public class WeaverTests
     [Fact]
     public void LogTrace_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace"));
     }
 
     [Fact]
     public void LogDebug_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogDebug"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogDebug"));
     }
 
     [Fact]
     public void LogInformation_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogInformation"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogInformation"));
     }
 
     [Fact]
     public void LogWarning_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogWarning"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogWarning"));
     }
 
     [Fact]
     public void LogError_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogError"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogError"));
     }
 
     [Fact]
     public void LogCritical_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogCritical"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogCritical"));
     }
 
     [Fact]
     public void LogTraceWithEnabled_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTraceWithEnabled"));
     }
 
     [Fact]
     public void LogTraceWithEnabled_With_Code_Before_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled_With_Code_Before"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTraceWithEnabled_With_Code_Before"));
     }
 
     [Fact]
     public void LogTraceWithEnabled_With_Code_After_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled_With_Code_After"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTraceWithEnabled_With_Code_After"));
     }
 
     [Fact]
     public void LogTraceWithEnabled_With_Code_Before_And_After_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled_With_Code_Before_And_After"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTraceWithEnabled_With_Code_Before_And_After"));
     }
 
     [Fact]
     public void LogTrace_With_Code_Before_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_With_Code_Before"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_With_Code_Before"));
     }
 
     [Fact]
     public void LogTrace_With_Code_After_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_With_Code_After"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_With_Code_After"));
     }
 
     [Fact]
     public void LogTrace_With_Code_Before_And_After_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_With_Code_Before_And_After"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_With_Code_Before_And_After"));
     }
 
     [Fact]
     public void LogTrace_Multiple_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_Multiple"));
     }
 
     [Fact]
     public void LogTrace_Multiple_With_First_IsEnabled_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple_With_First_IsEnabled"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_Multiple_With_First_IsEnabled"));
     }
 
     [Fact]
     public void LogTrace_Multiple_With_Second_IsEnabled_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple_With_Second_IsEnabled"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_Multiple_With_Second_IsEnabled"));
     }
 
     [Fact]
     public void LogTrace_Multiple_With_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple_With_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_Multiple_With_Code"));
     }
 
     [Fact]
     public void LogTrace_In_Switch_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Switch"));
     }
 
     [Fact]
     public void LogTrace_In_Switch_With_Before_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch_With_Before_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Switch_With_Before_Code"));
     }
 
     [Fact]
     public void LogTrace_In_Switch_With_After_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch_With_After_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Switch_With_After_Code"));
     }
 
     [Fact]
     public void LogTrace_In_Switch_With_Before_And_After_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch_With_Before_And_After_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Switch_With_Before_And_After_Code"));
     }
 
     [Fact]
     public void LogTrace_In_Exception_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception"));
     }
 
     [Fact]
     public void LogTrace_In_Exception_With_Before_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_Before_Code"));
     }
 
     [Fact]
     public void LogTrace_In_Exception_With_After_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_After_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_After_Code"));
     }
 
     [Fact]
     public void LogTrace_In_Exception_With_Before_And_After_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_And_After_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_Before_And_After_Code"));
     }
 
     [Fact]
     public void LogTrace_In_Exception_With_Before_Code_In_Try_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_Code_In_Try"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_Before_Code_In_Try"));
     }
 
     [Fact]
     public void LogTrace_In_Exception_With_After_Code_In_Try_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_After_Code_In_Try"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_After_Code_In_Try"));
     }
 
     [Fact]
     public void LogTrace_In_Exception_With_Before_And_After_Code_In_Try_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_And_After_Code_In_Try"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_Before_And_After_Code_In_Try"));
     }
 
     [Fact]
     public void LogTrace_In_Exception_Catch_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_Catch"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_Catch"));
+    }
+
+    public void Dispose()
+    {
+        uniqueForRuntime.Dispose();
     }
 }

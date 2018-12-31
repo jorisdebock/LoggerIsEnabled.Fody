@@ -1,0 +1,27 @@
+﻿.class public auto ansi beforefieldinit LoggerIsEnabledScenarios
+       extends [netstandard]System.Object
+{
+  .method public hidebysig instance void 
+          LogTrace_With_Code_Before_And_After() cil managed
+  {
+    // Code size       48 (0x30)
+    .maxstack  8
+    IL_0000:  ldarg.0
+    IL_0001:  call       instance void LoggerIsEnabledScenarios::CodeBefore()
+    IL_0006:  ldarg.0
+    IL_0007:  ldfld      class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledScenarios::_logger
+    IL_000c:  ldc.i4.0
+    IL_000d:  callvirt   instance bool [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger::IsEnabled(valuetype [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LogLevel)
+    IL_0012:  brfalse.s  IL_0029
+    IL_0014:  ldarg.0
+    IL_0015:  ldfld      class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledScenarios::_logger
+    IL_001a:  ldstr      "message"
+    IL_001f:  call       !!0[] [netstandard]System.Array::Empty<object>()
+    IL_0024:  call       void [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LoggerExtensions::LogTrace(class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger,
+                                                                                                                                 string,
+                                                                                                                                 object[])
+    IL_0029:  ldarg.0
+    IL_002a:  call       instance void LoggerIsEnabledScenarios::CodeAfter()
+    IL_002f:  ret
+  } 
+}

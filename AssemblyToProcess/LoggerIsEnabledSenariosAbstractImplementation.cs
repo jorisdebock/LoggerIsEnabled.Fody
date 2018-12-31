@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 
-public sealed class LoggerIsEnabledSenariosAbstractImplementation : LoggerIsEnabledSenariosAbstract
+public sealed class LoggerIsEnabledScenariosAbstractImplementation : LoggerIsEnabledScenariosAbstract
 {
-    public LoggerIsEnabledSenariosAbstractImplementation(ILogger logger) : base(logger)
+    public LoggerIsEnabledScenariosAbstractImplementation(ILogger logger) : base(logger)
     {
     }
 

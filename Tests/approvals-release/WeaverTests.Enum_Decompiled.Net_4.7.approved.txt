@@ -1,0 +1,5 @@
+﻿.class public auto ansi sealed LoggerIsEnabledEnum
+       extends [netstandard]System.Enum
+{
+  .field public specialname rtspecialname int32 value__
+}
