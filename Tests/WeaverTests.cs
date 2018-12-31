@@ -556,231 +556,198 @@ public class WeaverTests
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void Interface_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "ILoggerIsEnabledSenarios"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void Abstract_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenariosAbstract"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void AbstractImplementation_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenariosAbstractImplementation"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void Enum_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledEnum"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogDebug_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogDebug"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogInformation_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogInformation"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogWarning_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogWarning"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogError_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogError"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogCritical_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogCritical"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTraceWithEnabled_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTraceWithEnabled_With_Code_Before_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled_With_Code_Before"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTraceWithEnabled_With_Code_After_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled_With_Code_After"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTraceWithEnabled_With_Code_Before_And_After_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled_With_Code_Before_And_After"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_With_Code_Before_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_With_Code_Before"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_With_Code_After_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_With_Code_After"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_With_Code_Before_And_After_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_With_Code_Before_And_After"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_Multiple_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_Multiple_With_First_IsEnabled_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple_With_First_IsEnabled"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_Multiple_With_Second_IsEnabled_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple_With_Second_IsEnabled"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_Multiple_With_Code_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple_With_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Switch_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Switch_With_Before_Code_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch_With_Before_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Switch_With_After_Code_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch_With_After_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Switch_With_Before_And_After_Code_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch_With_Before_And_After_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_Before_Code_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_After_Code_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_After_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_Before_And_After_Code_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_And_After_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_Before_Code_In_Try_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_Code_In_Try"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_After_Code_In_Try_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_After_Code_In_Try"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_Before_And_After_Code_In_Try_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_And_After_Code_In_Try"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_Catch_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_Catch"));
