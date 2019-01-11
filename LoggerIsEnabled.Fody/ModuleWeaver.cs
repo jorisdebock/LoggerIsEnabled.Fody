@@ -101,7 +101,7 @@ public class ModuleWeaver : BaseModuleWeaver
     private List<InstructionBlock> GetLoggingInstructionBlocksWithoutIsEnabled(Collection<Instruction> instructions)
     {
         // IL_0001: ldarg.0      // this
-        // IL_0002: ldfld        class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledSenarios::_logger
+        // IL_0002: ldfld        class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledScenarios::_logger
         // IL_0007: ldstr        "message"
         // IL_000c: call         !!0/*object*/[] [mscorlib]System.Array::Empty<object>()
         // IL_0011: call         void [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LoggerExtensions::LogTrace(class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger, string, object[])
@@ -149,7 +149,7 @@ public class ModuleWeaver : BaseModuleWeaver
     private bool IsSurroundedWithIsEnabled(Collection<Instruction> instructions, int startIndex, InstructionBlock instructionBlock)
     {
         // IL_0001: ldarg.0      // this
-        // IL_0002: ldfld        class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledSenarios::_logger
+        // IL_0002: ldfld        class [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger LoggerIsEnabledScenarios::_logger
         // IL_0007: ldc.i4.0
         // IL_0008: callvirt     instance bool [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.ILogger::IsEnabled(valuetype [Microsoft.Extensions.Logging.Abstractions]Microsoft.Extensions.Logging.LogLevel)
         // IL_000d: stloc.0      // V_0
