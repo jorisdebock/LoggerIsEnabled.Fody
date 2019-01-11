@@ -11,6 +11,7 @@
     <RepositoryUrl>https://github.com/wazowsk1/LoggerIsEnabled.Fody</RepositoryUrl>
     <Authors>Wazowsk1</Authors>
     <Product>LoggerIsEnabled.Fody</Product>
+    <Version>1.0.1</Version>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Fody" Version="3.3.5" PrivateAssets="None" />
