@@ -8,10 +8,10 @@ using System.Linq;
 
 public class ModuleWeaver : BaseModuleWeaver
 {
-    private const string ILoggerField = "Microsoft.Extensions.Logging.ILogger";
-    private const string ILoggerIsEnabled = "Microsoft.Extensions.Logging.ILogger::IsEnabled";
+    private const string _iLoggerField = "Microsoft.Extensions.Logging.ILogger";
+    private const string _iLoggerIsEnabled = "Microsoft.Extensions.Logging.ILogger::IsEnabled";
+    private const string _logIdentifier = "Microsoft.Extensions.Logging.LoggerExtensions::Log";
 
-    private const string LogIdentifier = "Microsoft.Extensions.Logging.LoggerExtensions::Log";
     private List<EnumValue> _logLevelValues;
     private HashSet<string> _logInstructionsHash;
     private bool _isDebugBuild;
@@ -37,7 +37,7 @@ public class ModuleWeaver : BaseModuleWeaver
     {
         _isDebugBuild = ModuleDefinition.Assembly.IsDebugBuild();
         _logLevelValues = GetEnumValuesOfType("Microsoft.Extensions.Logging.LogLevel");
-        _logInstructionsHash = new HashSet<string>(_logLevelValues.Select(x => LogIdentifier + x.Name));
+        _logInstructionsHash = new HashSet<string>(_logLevelValues.Select(x => _logIdentifier + x.Name));
     }
 
     private void ProcessAssembly()
@@ -50,7 +50,7 @@ public class ModuleWeaver : BaseModuleWeaver
                 continue;
             }
 
-            var iLoggerField = type.GetFieldDefintion(ILoggerField);
+            var iLoggerField = type.GetFieldDefintion(_iLoggerField);
             if (iLoggerField == null)
             {
                 LogDebug($"Skipping type {type.Name}, ILogger field not found");
@@ -120,8 +120,7 @@ public class ModuleWeaver : BaseModuleWeaver
             }
 
             var startIndex = i;
-            var instructionBlock = new InstructionBlock
-            {
+            var instructionBlock = new InstructionBlock {
                 LogInstructionIndex = 4
             };
 
@@ -171,7 +170,7 @@ public class ModuleWeaver : BaseModuleWeaver
             }
 
             var isEnabledCallInstruction = instructions[isEnabledCallInstructionIndex];
-            if (!isEnabledCallInstruction.ToString().Contains(ILoggerIsEnabled))
+            if (!isEnabledCallInstruction.ToString().Contains(_iLoggerIsEnabled))
             {
                 continue;
             }
