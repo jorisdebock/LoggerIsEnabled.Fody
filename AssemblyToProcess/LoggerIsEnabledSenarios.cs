@@ -1,11 +1,11 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
 
-public class LoggerIsEnabledSenarios
+public class LoggerIsEnabledScenarios
 {
     private readonly ILogger _logger;
 
-    public LoggerIsEnabledSenarios(ILogger logger)
+    public LoggerIsEnabledScenarios(ILogger logger)
     {
         _logger = logger;
     }

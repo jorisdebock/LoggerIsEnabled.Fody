@@ -4,37 +4,35 @@ using Moq;
 using System;
 using System.Linq.Expressions;
 using Xunit;
-
-#if (NET461)
-
 using ApprovalTests;
 using ApprovalTests.Namers;
-using ApprovalTests.Reporters;
 
 #if(DEBUG)
-
 [UseApprovalSubdirectory("approvals-debug")]
 #else
-
 [UseApprovalSubdirectory("approvals-release")]
-#endif
-
 #endif
 
 #pragma warning disable 618
 
-public class WeaverTests
+public class WeaverTests:IDisposable
 {
     private static readonly TestResult _testResult;
     private static readonly Type _type;
 
     private readonly Expression<Action<ILogger>> _logAction = x => x.Log(It.IsAny<LogLevel>(), 0, It.IsAny<object>(), It.IsAny<Exception>(), It.IsAny<Func<object, Exception, string>>());
+    private IDisposable uniqueForRuntime;
 
     static WeaverTests()
     {
         var weavingTask = new ModuleWeaver();
         _testResult = weavingTask.ExecuteTestRun("AssemblyToProcess.dll", runPeVerify: false);
-        _type = _testResult.Assembly.GetType("LoggerIsEnabledSenarios");
+        _type = _testResult.Assembly.GetType("LoggerIsEnabledScenarios");
+    }
+
+    public WeaverTests()
+    {
+        uniqueForRuntime = ApprovalResults.UniqueForRuntime();
     }
 
     [Fact]
@@ -44,7 +42,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace();
 
@@ -59,7 +57,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace();
 
@@ -74,7 +72,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Debug)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogDebug();
 
@@ -89,7 +87,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Debug)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogDebug();
 
@@ -104,7 +102,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Information)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogInformation();
 
@@ -119,7 +117,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Information)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogInformation();
 
@@ -134,7 +132,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Warning)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogWarning();
 
@@ -149,7 +147,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Warning)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogWarning();
 
@@ -164,7 +162,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Error)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogError();
 
@@ -179,7 +177,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Error)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogError();
 
@@ -194,7 +192,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Critical)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogCritical();
 
@@ -209,7 +207,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Critical)).Returns(false);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogCritical();
 
@@ -224,7 +222,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTraceWithEnabled();
 
@@ -239,7 +237,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTraceWithEnabled_With_Code_Before();
 
@@ -254,7 +252,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTraceWithEnabled_With_Code_After();
 
@@ -269,7 +267,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTraceWithEnabled_With_Code_Before_And_After();
 
@@ -284,7 +282,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_With_Code_Before();
 
@@ -299,7 +297,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_With_Code_After();
 
@@ -314,7 +312,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_With_Code_Before_And_After();
 
@@ -329,7 +327,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_Multiple();
 
@@ -344,7 +342,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_Multiple_With_First_IsEnabled();
 
@@ -359,7 +357,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_Multiple_With_Second_IsEnabled();
 
@@ -374,7 +372,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_Multiple_With_Code();
 
@@ -389,7 +387,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Switch();
 
@@ -404,7 +402,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Switch_With_Before_Code();
 
@@ -419,7 +417,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Switch_With_After_Code();
 
@@ -434,7 +432,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Switch_With_Before_And_After_Code();
 
@@ -449,7 +447,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception();
 
@@ -464,7 +462,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_Before_Code();
 
@@ -479,7 +477,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_After_Code();
 
@@ -494,7 +492,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_Before_And_After_Code();
 
@@ -509,7 +507,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_Before_Code_In_Try();
 
@@ -524,7 +522,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_After_Code_In_Try();
 
@@ -539,7 +537,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_With_Before_And_After_Code_In_Try();
 
@@ -554,7 +552,7 @@ public class WeaverTests
         mockLogger.Setup(x => x.IsEnabled(LogLevel.Trace)).Returns(true);
         mockLogger.Setup(_logAction);
 
-        var instance = (dynamic)Activator.CreateInstance(_type, mockLogger.Object);
+        var instance = (dynamic) Activator.CreateInstance(_type, mockLogger.Object);
 
         instance.LogTrace_In_Exception_Catch();
 
@@ -562,238 +560,206 @@ public class WeaverTests
         mockLogger.Verify(_logAction, Times.Once);
     }
 
-#if (NET461)
-
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void Interface_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "ILoggerIsEnabledSenarios"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "ILoggerIsEnabledScenarios"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void Abstract_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenariosAbstract"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenariosAbstract"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void AbstractImplementation_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenariosAbstractImplementation"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenariosAbstractImplementation"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void Enum_Decompiled()
     {
         Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledEnum"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogDebug_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogDebug"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogDebug"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogInformation_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogInformation"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogInformation"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogWarning_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogWarning"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogWarning"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogError_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogError"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogError"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogCritical_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogCritical"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogCritical"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTraceWithEnabled_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTraceWithEnabled"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTraceWithEnabled_With_Code_Before_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled_With_Code_Before"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTraceWithEnabled_With_Code_Before"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTraceWithEnabled_With_Code_After_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled_With_Code_After"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTraceWithEnabled_With_Code_After"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTraceWithEnabled_With_Code_Before_And_After_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTraceWithEnabled_With_Code_Before_And_After"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTraceWithEnabled_With_Code_Before_And_After"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_With_Code_Before_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_With_Code_Before"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_With_Code_Before"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_With_Code_After_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_With_Code_After"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_With_Code_After"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_With_Code_Before_And_After_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_With_Code_Before_And_After"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_With_Code_Before_And_After"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_Multiple_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_Multiple"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_Multiple_With_First_IsEnabled_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple_With_First_IsEnabled"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_Multiple_With_First_IsEnabled"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_Multiple_With_Second_IsEnabled_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple_With_Second_IsEnabled"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_Multiple_With_Second_IsEnabled"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_Multiple_With_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_Multiple_With_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_Multiple_With_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Switch_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Switch"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Switch_With_Before_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch_With_Before_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Switch_With_Before_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Switch_With_After_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch_With_After_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Switch_With_After_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Switch_With_Before_And_After_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Switch_With_Before_And_After_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Switch_With_Before_And_After_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_Before_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_Before_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_After_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_After_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_After_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_Before_And_After_Code_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_And_After_Code"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_Before_And_After_Code"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_Before_Code_In_Try_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_Code_In_Try"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_Before_Code_In_Try"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_After_Code_In_Try_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_After_Code_In_Try"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_After_Code_In_Try"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_With_Before_And_After_Code_In_Try_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_With_Before_And_After_Code_In_Try"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_With_Before_And_After_Code_In_Try"));
     }
 
     [Fact]
-    [UseReporter(typeof(DiffReporter))]
     public void LogTrace_In_Exception_Catch_Decompiled()
     {
-        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledSenarios::LogTrace_In_Exception_Catch"));
+        Approvals.Verify(Ildasm.Decompile(_testResult.AssemblyPath, "LoggerIsEnabledScenarios::LogTrace_In_Exception_Catch"));
     }
 
-#endif
+    public void Dispose()
+    {
+        uniqueForRuntime.Dispose();
+    }
 }

@@ -1,3 +1,0 @@
-﻿.class interface public abstract auto ansi ILoggerIsEnabledSenarios
-{
-}
